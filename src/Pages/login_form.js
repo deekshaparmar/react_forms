@@ -8,10 +8,16 @@ const LoginForm = () => {
 const submitForm=(e)=>{
 
    e.preventDefault()
-
-   const newentry={email:email, password:password};
-
+   if (email && password){
+   // here id is time which is diffrent always .we are taking this time to set key in map function (allEntry)
+   const newentry={id:new Date().getTime().toString(),email:email, password:password};
    setallEnrty([...allEnrty,newentry])
+// TO REMOVE EMAIL AND PASS FROM SCREEN AFTER LOGIN BUTTON CLICK
+   setemail("");
+   setpassword("");
+   }else{
+        alert("please fill the form then submit")
+   }
 
 }
     return (
@@ -54,10 +60,11 @@ const submitForm=(e)=>{
       <div>
            {
                 allEnrty.map((ele)=>{
+                     const {id,email,password}=ele
                      return(                     
-                     <div className="container">
-                     <p>{ele.email}</p>
-                     <p>{ele.password}</p>
+                     <div className="container" key={id}>
+                     <p>{email}</p>
+                     <p>{password}</p>
                      </div>
 
                  ) })
