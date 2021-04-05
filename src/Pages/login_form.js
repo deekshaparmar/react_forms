@@ -3,8 +3,17 @@ import React,{useState} from 'react'
 const LoginForm = () => {
     const [email, setemail] = useState('')
     const [password, setpassword] = useState('')
-   
+    const [allEnrty, setallEnrty] = useState([])
 
+const submitForm=(e)=>{
+
+   e.preventDefault()
+
+   const newentry={email:email, password:password};
+
+   setallEnrty([...allEnrty,newentry])
+
+}
     return (
     <>
     <form>
@@ -38,12 +47,22 @@ const LoginForm = () => {
             onChange={(e)=>{setpassword(e.target.value)}}
                  />
       
-      <button type="submit">Login</button>
-  
-      
-      {/* <a href="./resetpassword.php">Forgot your password? </a> */}
+      <button onClick={submitForm} type="submit">Login</button>
+    
       </div>
       </form>
+      <div>
+           {
+                allEnrty.map((ele)=>{
+                     return(                     
+                     <div className="container">
+                     <p>{ele.email}</p>
+                     <p>{ele.password}</p>
+                     </div>
+
+                 ) })
+           }
+      </div>
       </>
 )}
 export default LoginForm
